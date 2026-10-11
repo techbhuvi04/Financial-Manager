@@ -12,7 +12,7 @@ A REST API for managing personal finances: record income and expenses, organise 
 
 The service is a single Spring Boot application backed by PostgreSQL. Its schema is managed by Flyway, it is covered by 276 automated tests, and it is deployed on Render.
 
-**Live API:** https://personal-finance-manager-64v6.onrender.com/api (health check: [`/actuator/health`](https://personal-finance-manager-64v6.onrender.com/actuator/health))
+**Live API:** https://personal-finance-manager-ak2y.onrender.com/api (health check: [`/actuator/health`](https://personal-finance-manager-ak2y.onrender.com/actuator/health))
 
 ```bash
 # Quick start: Java 17, no database needed
@@ -241,7 +241,7 @@ curl http://localhost:8080/actuator/health
 
 - **API base URL:** `http://localhost:8080/api`
 - **Swagger UI:** `http://localhost:8080/swagger-ui.html`
-- **Live deployment (Render):** API `https://personal-finance-manager-64v6.onrender.com/api`, Swagger UI `https://personal-finance-manager-64v6.onrender.com/swagger-ui.html`
+- **Live deployment (Render):** API `https://personal-finance-manager-ak2y.onrender.com/api`, Swagger UI `https://personal-finance-manager-ak2y.onrender.com/swagger-ui.html`
 
 ### Database migrations
 
@@ -283,7 +283,7 @@ The API uses **session cookies**. Log in once, save the cookie, and send it with
 
 ```bash
 BASE=http://localhost:8080/api
-# To use the live deployment instead: BASE=https://personal-finance-manager-64v6.onrender.com/api
+# To use the live deployment instead: BASE=https://personal-finance-manager-ak2y.onrender.com/api
 
 # Register (public)
 curl -s -X POST $BASE/auth/register -H 'Content-Type: application/json' \
@@ -648,8 +648,8 @@ bash scripts/api_smoke_test.sh http://localhost:8080/api
 bash financial_manager_tests.sh http://localhost:8080/api   # grading script supplied with the assignment
 
 # The same checks against the live Render deployment
-bash scripts/api_smoke_test.sh https://personal-finance-manager-64v6.onrender.com/api
-bash financial_manager_tests.sh https://personal-finance-manager-64v6.onrender.com/api
+bash scripts/api_smoke_test.sh https://personal-finance-manager-ak2y.onrender.com/api
+bash financial_manager_tests.sh https://personal-finance-manager-ak2y.onrender.com/api
 ```
 
 `financial_manager_tests.sh` is not part of this repository; it is linked from the assignment brief.
@@ -736,12 +736,12 @@ Steps:
 1. Sign in to [Render](https://render.com) with the GitHub account that can access this repository.
 2. Choose **New → Blueprint**, select the repository and click **Apply**. Render creates the database and the web service and builds the image.
 3. **Migrations:** Flyway runs on every start. On the new, empty database it creates the schema and seeds the categories; it never drops or rewrites existing data.
-4. **Verify:** when the service shows **Live**, open `https://personal-finance-manager-64v6.onrender.com/actuator/health` and expect `{"status":"UP",...}`. Startup and request logs are in the service's **Logs** tab.
+4. **Verify:** when the service shows **Live**, open `https://personal-finance-manager-ak2y.onrender.com/actuator/health` and expect `{"status":"UP",...}`. Startup and request logs are in the service's **Logs** tab.
 5. **Test the live API:**
 
    ```bash
-   bash financial_manager_tests.sh https://personal-finance-manager-64v6.onrender.com/api
-   bash scripts/api_smoke_test.sh https://personal-finance-manager-64v6.onrender.com/api
+   bash financial_manager_tests.sh https://personal-finance-manager-ak2y.onrender.com/api
+   bash scripts/api_smoke_test.sh https://personal-finance-manager-ak2y.onrender.com/api
    ```
 
 **HTTPS and cookies:** in production the session cookie is `Secure`, so clients only send it over HTTPS. Render terminates TLS, and the app honours the forwarded headers.

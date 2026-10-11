@@ -158,6 +158,22 @@ flowchart LR
         └── resources/application-test.yml
 ```
 
+### Request lifecycle
+
+The diagrams below trace a request end to end, from the HTTP call through security, validation, the service and repository layers, PostgreSQL, and back to the client.
+
+**1. API request → Security → Validation → Controller**
+
+![API request through security, validation and controller](docs/images/request-flow-1-security-validation-controller.png)
+
+**2. Service layer → Repository layer → PostgreSQL**
+
+![Service layer, repository layer and PostgreSQL](docs/images/request-flow-2-service-repository-database.png)
+
+**3. Response processing, example flows and error handling**
+
+![Response processing, example flows and error handling](docs/images/request-flow-3-response-and-errors.png)
+
 ## Design principles
 
 ### SOLID, with concrete examples

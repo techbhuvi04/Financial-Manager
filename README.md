@@ -10,7 +10,7 @@
 
 A REST API for managing personal finances: record income and expenses, organise them into categories, track savings goals, and produce monthly and yearly reports. Users authenticate with server-side sessions, and every user can see and change only their own data.
 
-The service is a single Spring Boot application backed by PostgreSQL. Its schema is managed by Flyway, it is covered by 276 automated tests, and it is deployed on Render.
+The service is a single Spring Boot application backed by PostgreSQL. Its schema is managed by Flyway, it is covered by 278 automated tests, and it is deployed on Render.
 
 **Live API:** https://personal-finance-manager-ak2y.onrender.com/api (health check: [`/actuator/health`](https://personal-finance-manager-ak2y.onrender.com/actuator/health))
 
@@ -74,7 +74,7 @@ SPRING_PROFILES_ACTIVE=h2 ./mvnw spring-boot:run      # API at http://localhost:
 | **Data isolation** | Every query is scoped to the logged-in user. Owner ids sent by the client are never trusted. |
 | **Validation and errors** | Bean Validation on every request, business-rule checks in services, and one consistent JSON error format for every 4xx/5xx, including security errors. |
 | **API docs** | OpenAPI spec at `/v3/api-docs` and Swagger UI at `/swagger-ui.html`. |
-| **Testing** | 276 unit and integration tests, JaCoCo coverage with an enforced 80% line threshold, and a curl-based smoke-test script. |
+| **Testing** | 278 unit and integration tests, JaCoCo coverage with an enforced 80% line threshold, and a curl-based smoke-test script. |
 
 ## Technology stack
 
@@ -313,6 +313,12 @@ curl -s -b cookies.txt -X POST $BASE/auth/logout
 All bodies are JSON; dates use `yyyy-MM-dd`; monetary values have two decimal places (zero is written as `0`). Interactive documentation is at `/swagger-ui.html`.
 
 ### Endpoints
+
+#### API info
+
+| Method | Endpoint | Auth | Description | Success | Errors |
+| --- | --- | --- | --- | --- | --- |
+| `GET` | `/api` (also `/`) | Public | Service name, status, documentation link and main endpoints | 200 | none |
 
 #### Authentication
 
@@ -658,8 +664,8 @@ bash financial_manager_tests.sh https://personal-finance-manager-ak2y.onrender.c
 
 | Check | Result |
 | --- | --- |
-| `./mvnw clean verify` | BUILD SUCCESS: 276 tests, 0 failures, 0 errors, 0 skipped |
-| JaCoCo coverage | 98.3% line, 90.6% branch (only `FinanceApplication.main` is excluded) |
+| `./mvnw clean verify` | BUILD SUCCESS: 278 tests, 0 failures, 0 errors, 0 skipped |
+| JaCoCo coverage | 98.4% line, 90.6% branch (only `FinanceApplication.main` is excluded) |
 | Assignment grading script (local PostgreSQL and `h2` profile) | 86/86 passed |
 | `scripts/api_smoke_test.sh` | 68/68 passed |
 

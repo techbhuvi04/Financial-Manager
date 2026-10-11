@@ -25,7 +25,8 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 
 /**
- * Session-based security: registration, login, the CSRF bootstrap endpoint, health and API docs are public;
+ * Session-based security: the API info root, registration, login, the CSRF bootstrap endpoint, health and API docs
+ * are public;
  * everything else requires an authenticated session. Errors are rendered as JSON by {@link SecurityErrorHandler}.
  */
 @Configuration
@@ -66,6 +67,7 @@ public class SecurityConfig {
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers(HttpMethod.POST, PUBLIC_AUTH_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/auth/csrf").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/", "/api").permitAll()
                         .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
                         .requestMatchers(DOC_ENDPOINTS).permitAll()
                         .anyRequest().authenticated());
